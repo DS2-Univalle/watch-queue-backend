@@ -1,9 +1,20 @@
 service: aws-node-http-api-project
 frameworkVersion: "3"
 
+custom:
+  defaultStage: dev
+  environment: ${file(env.yml):${self:provider.stage}, file(env.yml):default}
+
 provider:
   name: aws
   runtime: nodejs18.x
+  stage: ${opt:stage, self:custom.defaultStage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+        - dynamodb:*
+      Resource: 
+        - ${self:custom.environment.arn}
 
 functions:
   api:
