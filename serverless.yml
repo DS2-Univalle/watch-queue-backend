@@ -29,6 +29,12 @@ functions:
       - httpApi:
           path: /auth/register
           method: post
+  login:
+    handler: src/login.login
+    events:
+      - httpApi:
+          path: /auth/login
+          method: post
 
 resources:
   Resources:
