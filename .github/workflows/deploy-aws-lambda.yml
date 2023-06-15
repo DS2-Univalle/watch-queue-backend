@@ -4,7 +4,7 @@ name: Deploy Aws Lambda with serverless
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy-dev:
