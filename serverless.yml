@@ -23,18 +23,30 @@ functions:
       - httpApi:
           path: /
           method: get
+  register:
+    handler: src/register.registerUser
+    events:
+      - httpApi:
+          path: /auth/register
+          method: post
+  login:
+    handler: src/login.login
+    events:
+      - httpApi:
+          path: /auth/login
+          method: post
 
 resources:
   Resources:
-    WatchQueue:
+    WatchQueue2:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: WatchQueue
+        TableName: WatchQueue2
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions: 
-          - AttributeName: id
+          - AttributeName: email
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: email
             KeyType: HASH
           
