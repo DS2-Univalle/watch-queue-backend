@@ -1,5 +1,5 @@
 service: aws-node-http-api-project
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -12,3 +12,18 @@ functions:
       - httpApi:
           path: /
           method: get
+
+resources:
+  Resources:
+    WatchQueue:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: WatchQueue
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions: 
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          
