@@ -7,5 +7,10 @@
   },
   "keywords": [],
   "author": "stamayo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1397.0",
+    "bcrypt": "^5.1.0",
+    "uuid": "^9.0.0"
+  }
 }
