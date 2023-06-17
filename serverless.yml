@@ -17,12 +17,6 @@ provider:
         - ${self:custom.environment.arn}
 
 functions:
-  api:
-    handler: src/index.handler
-    events:
-      - httpApi:
-          path: /
-          method: get
   register:
     handler: src/register.registerUser
     events:
