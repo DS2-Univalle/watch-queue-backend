@@ -1,6 +1,24 @@
-# Serverless Framework Node HTTP API on AWS
+# Watch queue backend
 
-## Usage
+Backend with serverless Framework Node HTTP API on AWS
+
+## Architecute
+![Architecture](architecture.png)
+
+## Notifications
+
+Our repository is associated to slack, so every time a commit, push, pull request, or merge is performed, it notifies each of the developers, and a joint group we have.
+
+:link: [Slack](https://app.slack.com/client/T053Q1SDB5E/C0532R2T528)
+
+![Slack](slack.png)
+
+## Initialization 
+1. Download and install [Node 18.12.1](https://nodejs.org/download/release/v18.12.1/)
+2. Clone this repository 
+3. Install development dependencies
+  `npm install` 
+
 
 ### Deployment
 
