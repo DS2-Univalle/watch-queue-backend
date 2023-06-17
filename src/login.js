@@ -1,17 +1,18 @@
-const AWS = require("aws-sdk");
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-const tableName = "WatchQueue2";
+const { getUser } = require("./user");
 
+function APIResponse(statusCode, body) {
+  return JSON.stringify({
+    statusCode,
+    body
+  });
+}
 module.exports.login = async (event) => {
   const { email, password } = JSON.parse(event.body);
 
   if (!email || !password) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: "All field are required",
-      }),
-    };
+    return APIResponse(400,{
+      message: "All field are required",
+    })
   }
 
   try {
@@ -19,47 +20,24 @@ module.exports.login = async (event) => {
     const user = result.Item;
 
     if (!user || !user.name) {
-      return {
-        statusCode: 404,
-        body: JSON.stringify({
-          message: "User not found",
-        }),
-      };
+      return APIResponse(404, {
+        message: "User not found",
+      })
     }
 
     if (user.password !== password) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: "Invalidad credentials",
-        }),
-      };
+      return APIResponse(400, {
+        message: "Invalid credentials",
+      })
     }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        name: user.name,
-        email: user.email,
-      }),
-    };
+    return APIResponse(200,{
+      name: user.name,
+      email: user.email,
+    })
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: `Error search user, ${error.message}`,
-      }),
-    };
+    return APIResponse(500, {
+      message: `Error search user, ${error.message}`,
+    })
   }
 };
-
-async function getUser(email) {
-  return await dynamodb
-    .get({
-      TableName: tableName,
-      Key: {
-        email: email,
-      },
-    })
-    .promise();
-}
